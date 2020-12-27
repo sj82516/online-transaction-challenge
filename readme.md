@@ -5,9 +5,11 @@
 
 在工作中都有使用上，趁這個機會再練習一下  
 
-此 Repo 主要提供環境架設 / 塞入假資料 / 測試 API 發送 / 最終驗證 / 系統隨機性錯誤，基本上沒有正確實作 lock 與處理 concurrency 問題都會檢查出來，希望可以給想要練手的大家一個簡便的工具   
+此 Repo 主要提供環境架設 / 塞入假資料 / 測試 API 發送 / 最終驗證 / 系統隨機性錯誤，基本上沒有正確實作 lock 與處理 concurrency 問題都會檢查出來，希望可以給想要練手的大家一個簡便的工具    
 
 環境搭建使用 Docker Compose
+
+對應的 api server 可以參考我的實作版本 https://github.com/sj82516/online-transaction-challenge-implementation  
 
 ## 測試環境說明  
 移動到各別目錄底下執行 `$docker-compose up` 即可完成，為了便利性請使用預設的資料庫，連線方式與 Schema 會列在個別目錄下  
@@ -25,7 +27,7 @@ Sample Body
 請檢查 user 在 BandAccount 餘額是否足夠 / product 數量是否足夠，如果不足夠請返回 status code:400    
 如果請求成功則對應 DB Schema 寫入 Order 紀錄 並回應 200
 
-#### 2. `POST /error`  
+#### 2. TODO: `POST /error`  
 測試系統不穩定時對於訂單結果的影響，收到 API Request 後請自己重啟 Server (自由心證)，藉此判斷中斷處理到一半的 Request 是否能維持正確  
 
 ## 假資料說明  

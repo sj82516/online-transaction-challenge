@@ -40,7 +40,9 @@ sql-transaction_init-script_1 exited with code 0
 ```
 才代表資料庫初始化完成  
 ### 2. 啟動 api server
-開啟新的 terminal，啟動 api server，預設 port 為 3001  
+開啟新的 terminal，自行啟動 api server，預設 port 為 3001，實作就留給各位    
+可以參考我的實作 https://github.com/sj82516/online-transaction-challenge-implementation/tree/master/sql-transaction  
+
 ### 3. 執行測試
 確認 api-server 啟動後，呼叫 `$ docker run -it -e action=test yuanchieh/online-transaction:sql-transaction`，如果有指定的 api server url，可以透過 `-e api_host=http://hello.com:8080` 指定，需要注意 docker 的 localhost 指定為題    
 運行中 log 會打出完成的 request 數量，預計會在 2 分鐘內完成 2000 多個 request，沒有全部成功是合理的，會故意製造一些用戶餘額不足以及商品不夠賣的邊際問題        
