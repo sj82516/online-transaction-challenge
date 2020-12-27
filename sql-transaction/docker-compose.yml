@@ -1,0 +1,22 @@
+version: "3.9"
+services: 
+  mysql:
+    image: mysql:8.0
+    environment: 
+      - MYSQL_ROOT_PASSWORD=my-secret-pw
+      - MYSQL_USER=api-server
+      - MYSQL_PASSWORD=hello-world
+      - MYSQL_DATABASE=online-transaction
+      - MYSQL_ROOT_HOST=%
+    ports: 
+      - '3306:3306'
+    expose: 
+      - 3306
+  init-script:
+    build: ./init
+    depends_on: 
+      - mysql
+    links: 
+      - mysql
+    
+       
