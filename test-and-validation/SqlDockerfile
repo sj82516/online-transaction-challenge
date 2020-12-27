@@ -1,0 +1,10 @@
+FROM node:14.15.3-alpine3.10
+
+WORKDIR /usr/src/app
+COPY ./sql-transaction/package*.json ./
+RUN npm install
+
+ADD common.js /usr/src/
+COPY sql-transaction .
+
+CMD /bin/sh ./start.sh

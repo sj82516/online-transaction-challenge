@@ -1,9 +1,9 @@
 const event = require('events')
-const { Resolver } = require('dns').promises
 const process = require('process')
 const axios = require('axios')
 
-const resolver = new Resolver();
+const {parseLocalHost, randomChooseElementFromArray} = require('../../common');
+const {dbConnect} = require('../common');
 
 async function main() {
     let knex = null;
@@ -16,21 +16,7 @@ async function main() {
     });
 
     try {
-        knex = require('knex')({
-            client: 'mysql2',
-            connection: {
-                host: localhost,
-                user: 'api-server',
-                password: 'hello-world',
-                database: 'online-transaction'
-            },
-            acquireConnectionTimeout: 60000,
-            pool: {
-                min: 5,
-                max: 10
-            }
-        });
-
+        knex = dbConnect(localhost);
 
         const [
             userIdList,
@@ -51,21 +37,6 @@ async function main() {
         knex.destroy();
         process.exit();
     }
-}
-
-// for docker compliance
-async function parseLocalHost() {
-    let localhost = 'localhost'
-    try {
-        const dockerLocalHost = await resolver.resolve4('host.docker.internal');
-        if (Array.isArray(dockerLocalHost) && dockerLocalHost[0]) {
-            localhost = dockerLocalHost[0];
-        }
-    } catch (error) {
-        // resolve failed, just ignore
-    }
-
-    return localhost
 }
 
 main();
@@ -252,13 +223,3 @@ async function buyProductRequest({
         amount
     });
 }
-
-function randomChooseElementFromArray(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
-}
-
-function sleep(ms) {
-    return new Promise((resolve) => {
-        setTimeout(resolve, ms);
-    });
-} 

@@ -1,18 +1,18 @@
 {
-  "name": "test",
+  "name": "sql-transaction",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "common.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "test": "node test/index.js",
+    "validate": "node validation/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
-    "knex": "^0.21.14",
+    "knex": "^0.21.15",
     "mysql2": "^2.2.5"
   }
 }

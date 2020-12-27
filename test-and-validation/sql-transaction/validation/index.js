@@ -1,22 +1,12 @@
+const {parseLocalHost} = require('../../common');
+const {dbConnect, sleep} = require('../common');
+
 async function main() {
     let knex = null;
     let localhost = await parseLocalHost();
     try {
-        knex = require('knex')({
-            client: 'mysql2',
-            connection: {
-                host: localhost,
-                user: 'api-server',
-                password: 'hello-world',
-                database: 'online-transaction'
-            },
-            acquireConnectionTimeout: 60000,
-            pool: {
-                min: 5,
-                max: 10
-            }
-        });
-
+        knex = dbConnect(localhost);
+    
         console.log("start sql transaction validation, it would take around 1 minutes.")
         await validate(knex);
     } catch (err) {
@@ -32,21 +22,6 @@ async function main() {
 }
 
 main();
-
-// for docker compliance
-async function parseLocalHost() {
-    let localhost = 'localhost'
-    try {
-        const dockerLocalHost = await resolver.resolve4('host.docker.internal');
-        if (Array.isArray(dockerLocalHost) && dockerLocalHost[0]) {
-            localhost = dockerLocalHost[0];
-        }
-    } catch (error) {
-        // resolve failed, just ignore
-    }
-
-    return localhost
-}
 
 async function validate(knex) {
     const {
