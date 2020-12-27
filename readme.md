@@ -2,14 +2,15 @@
 近日拜讀到安德魯大大的文章 [架構面試題 #1, 線上交易的正確性](https://columns.chicken-house.net/2018/03/25/interview01-transaction/) 談如何正確設計線上交易的正確性，單機版本先略過不提，其中
 1. 搭配 SQL Transaction  
 2. 分散式鎖  
-在後續的工作都有使用上，趁這個機會在練習一下  
+
+在工作中都有使用上，趁這個機會再練習一下  
 
 此 Repo 主要提供環境架設 / 塞入假資料 / 測試 API 發送 / 最終驗證 / 系統隨機性錯誤，基本上沒有正確實作 lock 與處理 concurrency 問題都會檢查出來，希望可以給想要練手的大家一個簡便的工具   
 
 環境搭建使用 Docker Compose
 
 ## 測試環境說明  
-到各別目錄底下執行 `$docker-compose up` 即可完成，為了便利性請使用預設的資料庫，連線方式與 Schema 會列在個別目錄下  
+移動到各別目錄底下執行 `$docker-compose up` 即可完成，為了便利性請使用預設的資料庫，連線方式與 Schema 會列在個別目錄下  
 
 ### 實作測試 Server
 請自行啟動獨立 Server，port 與 url 不限定，請完成以下幾隻 API
